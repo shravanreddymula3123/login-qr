@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<title>MART FEST | Scan • Visit • Win</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #f59e0b;
+    --bg: #0b0f19;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
+    --success: #34d399;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: #111827;
+    border: 1px solid #293548;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px #0007;
+}
+
+.hero {
+    text-align: center;
+    padding: 55px 20px 45px;
+    background: linear-gradient(135deg, #312e81, #0f172a);
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand h1 {
+    color: var(--primary);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+}
+
+.brand span {
+    font-size: 2rem;
+}
+
+.tagline {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    border: 1px solid #f59e0b55;
+    border-radius: 30px;
+    color: #fcd34d;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.hero p {
+    margin-top: 15px;
+    color: var(--muted);
+}
+
+.offers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 25px;
+}
+
+.offer {
+    position: relative;
+    padding: 25px 15px;
+    background: linear-gradient(145deg, #1f2937, #111827);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    transition: .25s;
+}
+
+.offer:hover:not(:disabled) {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.offer small {
+    display: block;
+    color: var(--primary);
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.offer h2 {
+    font-size: 1.5rem;
+}
+
+.emoji {
+    display: block;
+    font-size: 2.4rem;
+    margin: 12px 0;
+}
+
+.requirement {
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: 10px;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 800;
+    background: #334155;
+    color: #cbd5e1;
+}
+
+.offer.unlocked {
+    border-color: var(--success);
+}
+
+.offer.unlocked .status {
+    background: #064e3b;
+    color: #a7f3d0;
+}
+
+.offer.claimed {
+    border-color: #38bdf8;
+}
+
+.offer.claimed .status {
+    background: #0c4a6e;
+    color: #bae6fd;
+}
+
+.content {
+    padding: 20px 25px 40px;
+    text-align: center;
+}
+
+.kicker {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.content h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.description {
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 12px auto 25px;
+    max-width: 480px;
+}
+
+form {
+    text-align: left;
+    max-width: 450px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    background: #1f2937;
+    color: white;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 14px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    border: none;
+    border-radius: 12px;
+    color: #111827;
+    font-weight: 900;
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.message {
+    margin-top: 15px;
+    line-height: 1.6;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.note {
+    color: #64748b;
+    font-size: .8rem;
+    line-height: 1.6;
+    margin: 25px auto 0;
+    max-width: 450px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #0d1322;
+    color: #64748b;
+    font-size: .8rem;
+}
+
+.popup-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #020617d9;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.popup-bg.show {
+    display: flex;
+}
+
+.popup {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    text-align: center;
+}
+
+.popup h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.popup p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .container {
+        border-radius: 0;
+        border: none;
+    }
+
+    .hero {
+        padding: 40px 15px;
+    }
+
+    .brand span {
+        font-size: 1.5rem;
+    }
+
+    .offers {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .offer {
+        padding: 20px 12px;
+    }
+
+    .content {
+        padding: 20px 18px 35px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <header class="hero">
+        <div class="brand">
+            <span aria-hidden="true">🛒</span>
+            <h1>MART FEST</h1>
+            <span aria-hidden="true">🛍️</span>
+        </div>
+        <div class="tagline">SCAN · VISIT · WIN</div>
+        <p>Every visit brings you closer to exclusive rewards!</p>
+    </header>
+
+    <section class="offers" aria-label="Visit rewards">
+
+        <button class="offer" type="button" data-visits="1">
+            <small>FIRST REWARD</small>
+            <h2>5% OFF</h2>
+            <span class="emoji">🏷️</span>
+            <p class="requirement">Unlock after 1 visit</p>
+            <span class="status">Sign in to unlock</span>
+        </button>
+
+        <button class="offer" type="button" data-visits="3">
+            <small>BIGGER SAVINGS</small>
+            <h2>10% OFF</h2>
+            <span class="emoji">💰</span>
+            <p class="requirement">Unlock after 3 visits</p>
+            <span class="status">Locked</span>
+        </button>
+
+        <button class="offer" type="button" data-visits="5">
+            <small>PREMIUM REWARD</small>
+            <h2>15% OFF</h2>
+            <span class="emoji">🎁</span>
+            <p class="requirement">Unlock after 5 visits</p>
+            <span class="status">Locked</span>
+        </button>
+
+    </section>
+
+    <main class="content">
+        <p class="kicker">Welcome to the Club</p>
+        <h2 id="welcome">Sign in to claim your reward</h2>
+
+        <p class="description">
+            Enter your email to access your loyalty rewards.
+            Your first demo visit unlocks 5% OFF!
+        </p>
+
+        <form id="loginForm">
+            <label for="email">Email address</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required>
+
+            <button class="btn" type="submit" id="loginButton">
+                Continue with email →
+            </button>
+
+            <p class="message" id="message" aria-live="polite"></p>
+        </form>
+
+        <p class="note">
+            Demo version: visit progress and claimed rewards are saved
+            in this browser. Email entry alone is not secure authentication.
+            Real stores should record verified visits through a backend.
+        </p>
+    </main>
+
+    <footer>
+        Made for great savings and happy visits.
+        © <span id="year"></span> Mart Fest
+    </footer>
+</div>
+
+<div class="popup-bg" id="popupBg"
+     role="dialog" aria-modal="true"
+     aria-labelledby="popupTitle">
+    <div class="popup">
+        <h2 id="popupTitle">MART FEST</h2>
+        <p id="popupMessage"></p>
+        <button class="btn" id="closePopup" type="button">Got it</button>
+    </div>
+</div>
+
+<script>
+const $ = selector => document.querySelector(selector);
+
+$("#year").textContent = new Date().getFullYear();
+
+let currentEmail = "";
+let customer = null;
+
+const REWARDS = [
+    { visits: 1, title: "5% OFF", emoji: "🏷️" },
+    { visits: 3, title: "10% OFF", emoji: "💰" },
+    { visits: 5, title: "15% OFF", emoji: "🎁" }
+];
+
+function storageKey(email) {
+    return "martFestCustomer_" + email.toLowerCase();
+}
+
+function loadCustomer(email) {
+    const key = storageKey(email);
+
+    try {
+        const saved = JSON.parse(localStorage.getItem(key));
+
+        if (saved && Number.isInteger(saved.visits) &&
+            saved.visits >= 0 && saved.claimed &&
+            typeof saved.claimed === "object") {
+            return saved;
+        }
+    } catch (error) {
+        console.warn("Could not load saved customer data.");
+    }
+
+    return { visits: 0, claimed: {} };
+}
+
+function saveCustomer() {
+    if (!currentEmail || !customer) return;
+
+    localStorage.setItem(
+        storageKey(currentEmail),
+        JSON.stringify(customer)
+    );
+}
+
+function showPopup(title, message) {
+    $("#popupTitle").textContent = title;
+    $("#popupMessage").textContent = message;
+    $("#popupBg").classList.add("show");
+    $("#closePopup").focus();
+}
+
+function closePopup() {
+    $("#popupBg").classList.remove("show");
+}
+
+$("#closePopup").addEventListener("click", closePopup);
+
+$("#popupBg").addEventListener("click", event => {
+    if (event.target === $("#popupBg")) closePopup();
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closePopup();
+});
+
+function renderRewards() {
+    document.querySelectorAll(".offer").forEach((card, index) => {
+        const reward = REWARDS[index];
+        const status = card.querySelector(".status");
+
+        card.classList.remove("unlocked", "claimed");
+
+        if (!currentEmail || !customer) {
+            status.textContent = "Sign in to unlock";
+            card.disabled = false;
+            return;
+        }
+
+        if (customer.claimed[reward.visits]) {
+            card.classList.add("claimed");
+            status.textContent = "✓ Claimed";
+        } else if (customer.visits >= reward.visits) {
+            card.classList.add("unlocked");
+            status.textContent = "🎉 Claim reward";
+        } else {
+            status.textContent =
+                `${reward.visits - customer.visits} more visit(s) needed`;
+        }
+
+        card.disabled = false;
+    });
+}
+
+$("#loginForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const email = $("#email").value.trim().toLowerCase();
+    const message = $("#message");
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        message.style.color = "#f43f5e";
+        message.textContent = "Please enter a valid email address.";
+        return;
+    }
+
+    currentEmail = email;
+    customer = loadCustomer(email);
+
+    /*
+      Frontend demo:
+      The first login creates one demo visit.
+      Later logins do not add more visits automatically.
+    */
+    if (!customer.demoVisitCreated) {
+        customer.visits = Math.max(customer.visits, 1);
+        customer.demoVisitCreated = true;
+        saveCustomer();
+    }
+
+    $("#welcome").textContent = "Welcome to Mart Fest!";
+    message.style.color = "#34d399";
+    message.textContent = "Signed in as " + email + ". Your rewards are ready.";
+
+    renderRewards();
+
+    showPopup(
+        "Welcome! 🎉",
+        customer.visits >= 1 && !customer.claimed[1]
+            ? "Your first demo visit is recorded! Your 5% OFF reward is unlocked. Select the reward card to claim it."
+            : "Your saved rewards have been loaded. Select an unlocked reward to claim it."
+    );
+});
+
+document.querySelectorAll(".offer").forEach((card, index) => {
+    card.addEventListener("click", () => {
+        const reward = REWARDS[index];
+
+        if (!currentEmail || !customer) {
+            showPopup(
+                "Sign in first",
+                "Enter your email and continue to access your rewards."
+            );
+            $("#email").focus();
+            return;
+        }
+
+        if (customer.claimed[reward.visits]) {
+            showPopup(
+                "Already claimed ✓",
+                `You have already claimed your ${reward.title} reward.`
+            );
+            return;
+        }
+
+        if (customer.visits < reward.visits) {
+            const needed = reward.visits - customer.visits;
+
+            showPopup(
+                "Reward locked 🔒",
+                `You need ${needed} more visit(s) to unlock ${reward.title}.`
+            );
+            return;
+        }
+
+        customer.claimed[reward.visits] = true;
+        saveCustomer();
+        renderRewards();
+
+        showPopup(
+            "Reward claimed! 🎉",
+            `Congratulations! Your ${reward.title} reward has been claimed. Show this confirmation to the store staff.`
+        );
+    });
+});
+
+renderRewards();
+</script>
+</body>
+</html>
+```
